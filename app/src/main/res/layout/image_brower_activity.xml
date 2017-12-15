@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_image_brower"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </android.support.v4.view.ViewPager>
+
+    <TextView
+        android:id="@+id/tv_image_index"
+        android:text="1/9"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:padding="4dp"/>
+
+    <Button
+        android:id="@+id/bt_save"
+        android:text="save"
+        android:textSize="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:layout_width="56dp"
+        android:layout_height="36dp" />
+
+
+
+</RelativeLayout>

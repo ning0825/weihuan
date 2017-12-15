@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/include_retweeted_status"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_retweeted_content"
+        style="@style/TextViewBody"
+        android:padding="16dp"
+        android:textColor="@color/gray" />
+
+    <include
+        android:id="@+id/include_status_image"
+        layout="@layout/include_status_image"
+        android:visibility="gone" />
+
+</LinearLayout>

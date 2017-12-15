@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.MainActivity">
+    <item android:id="@+id/bt_trend"
+        android:title="trend"
+        android:icon="@mipmap/bg_main_trend"
+        app:showAsAction="always"/>
+    <item android:id="@+id/bt_notify"
+        android:title="notify"
+        android:icon="@mipmap/bg_main_notifi"
+        app:showAsAction="always"/>
+</menu>

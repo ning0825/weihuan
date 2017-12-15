@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/ll_status_item"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_status_head"/>
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:lineSpacingMultiplier="1.2"
+        android:text="习近平最牛逼"
+        android:textColor="@color/black"
+        android:textSize="14sp"/>
+
+    <include layout="@layout/include_status_image"/>
+
+    <include layout="@layout/include_retweeted_status"/>
+
+    <include
+        android:id="@+id/ll_bottom_control"
+        layout="@layout/include_status_controlbar" />
+
+
+
+
+</LinearLayout>
