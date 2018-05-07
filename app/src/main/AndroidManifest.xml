@@ -29,6 +29,14 @@
         <activity android:name=".activity.MainActivity"></activity>
         <activity android:name=".activity.DiscActivity"></activity>
         <activity android:name=".activity.UserInfoActivity"></activity>
+        <activity android:name=".activity.WriteStatusActivity"></activity>
+        <activity android:name=".activity.ImageBrowerActivity"></activity>
+        <activity android:name=".activity.NotifyActivity"></activity>
+        <activity android:name=".activity.StatusDetailActivity"></activity>
+        <activity android:name=".activity.MyLikeActivity"></activity>
+        <activity android:name=".activity.MyFavActivity"></activity>
+        <activity android:name=".activity.DraftsActivity"></activity>
+        <activity android:name=".activity.LaterReadActivity"></activity>
         <activity android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
             android:configChanges="keyboardHidden|orientation"
             android:windowSoftInputMode="adjustResize"

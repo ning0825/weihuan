@@ -3,6 +3,7 @@ package com.tanhuan.weihuan.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 
 import com.tanhuan.weihuan.BaseActivity;
@@ -28,12 +29,18 @@ public class DiscActivity extends BaseActivity {
 
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
-        mToolbar.setNavigationIcon(R.mipmap.bg_back);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                finish();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_disc, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_drawer_avatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:clickable="true" />
+
+    <TextView
+        android:id="@+id/tv_drawer_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:id="@+id/ll_drawer_write"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="20dp"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_margin="14dp"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@drawable/drawer_write" />
+
+        <TextView
+            android:text="写微博"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_drawer_like"
+        android:layout_marginLeft="20dp"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_margin="12dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/drawer_like" />
+
+        <TextView
+            android:text="我赞过的"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_drawer_fav"
+        android:layout_marginLeft="20dp"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_margin="12dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/drawer_fav" />
+
+        <TextView
+            android:text="我的收藏"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_drawer_drafts"
+        android:layout_marginLeft="20dp"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_margin="13dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/drawer_drafts" />
+
+        <TextView
+            android:text="草稿箱"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_drawer_later"
+        android:layout_marginLeft="20dp"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_margin="12dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/drawer_later"/>
+
+        <TextView
+            android:text="稍后阅读"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+
+</LinearLayout>

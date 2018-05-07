@@ -6,34 +6,33 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout
+        android:id="@+id/rl_user_info"
         android:layout_width="match_parent"
-        android:layout_height="377dp"
-        android:background="@drawable/bg_info_gradient">
+        android:layout_height="377dp">
 
         <Button
+            android:id="@+id/bt_info_back"
             android:background="@drawable/bg_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="10dp"/>
         <Button
+            android:id="@+id/bt_info_follow"
             android:layout_width="70dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_margin="10dp"
             android:padding="3dp"
             android:textSize="10sp"
-            android:background="@drawable/bg_info_following"
-            android:text="following"/>
+            android:background="@drawable/bg_info_following"/>
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/civ_info_avatar"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="67dp"
-            android:src="@drawable/avator"/>
+            android:layout_marginTop="67dp"/>
         <TextView
             android:id="@+id/tv_info_name"
-            android:text="贪欢"
             android:textSize="28sp"
             android:layout_below="@+id/civ_info_avatar"
             android:layout_centerHorizontal="true"
@@ -43,11 +42,11 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/tv_info_des"
-            android:text="“我们会再见面，在一个没有黑暗的地方”"
-            android:layout_width="250dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/tv_info_name"
+            android:gravity="left"
             android:layout_marginTop="10dp"/>
         <LinearLayout
             android:orientation="horizontal"
@@ -60,7 +59,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
                 <TextView
-                    android:text="17"
+                    android:id="@+id/tv_num_weibo"
                     android:textSize="20sp"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -79,7 +78,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
                 <TextView
-                    android:text="169"
+                    android:id="@+id/tv_num_following"
                     android:textSize="20sp"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -98,7 +97,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
                 <TextView
-                    android:text="29"
+                    android:id="@+id/tv_num_follower"
                     android:textSize="20sp"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -115,6 +114,7 @@
     </RelativeLayout>
 
     <GridLayout
+        android:id="@+id/gv_info_four_image"
         android:layout_width="match_parent"
         android:layout_height="90dp">
         <com.tanhuan.weihuan.utils.CustImageView

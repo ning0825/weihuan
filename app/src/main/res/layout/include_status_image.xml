@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
-    android:id="@+id/fl_img"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="6dp">
     
     <com.tanhuan.weihuan.WrapHeightGridView
         android:id="@+id/gv_images"
         style="@style/GridViewImages"
-        android:layout_width="272dp"/>
+        android:layout_width="272dp"
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/iv_image"

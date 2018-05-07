@@ -1,8 +1,11 @@
 package com.tanhuan.weihuan.adapter;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.text.Html;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -12,10 +15,12 @@ import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.bumptech.glide.Glide;
 import com.sina.weibo.sdk.openapi.models.Status;
 import com.sina.weibo.sdk.openapi.models.User;
 import com.tanhuan.weihuan.R;
@@ -23,10 +28,14 @@ import com.tanhuan.weihuan.activity.ImageBrowerActivity;
 import com.tanhuan.weihuan.activity.StatusDetailActivity;
 import com.tanhuan.weihuan.activity.UserInfoActivity;
 import com.tanhuan.weihuan.activity.WriteStatusActivity;
+import com.tanhuan.weihuan.utils.DateUtils;
 import com.tanhuan.weihuan.utils.StringUtils;
+import com.tanhuan.weihuan.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by chenYaNing on 2017/12/10.
@@ -36,14 +45,11 @@ public class StatusAdapter extends BaseAdapter {
 
     private Context context;
     private List<Status> datas;
-    private ImageLoader imageLoader;
+    private SQLiteDatabase db;
 
     public StatusAdapter(Context context, List<Status> datas) {
         this.context = context;
         this.datas = datas;
-        ImageLoaderConfiguration configuration = ImageLoaderConfiguration.createDefault(context);
-        this.imageLoader = ImageLoader.getInstance();
-        this.imageLoader.init(configuration);
     }
 
     @Override
@@ -69,30 +75,32 @@ public class StatusAdapter extends BaseAdapter {
             holder = new ViewHolder();
 
             view = View.inflate(context, R.layout.status_item, null);
-            holder.llStatusItem = (LinearLayout) view.findViewById(R.id.ll_status_item);
-            holder.civAvatar = (ImageView) view.findViewById(R.id.civ_avatar);
-            holder.tvName = (TextView) view.findViewById(R.id.tv_name);
-            holder.tvSource = (TextView) view.findViewById(R.id.tv_source);
-            holder.tvCreateTime = (TextView) view.findViewById(R.id.tv_create_time);
-            holder.ivAvatarVip = (ImageView) view.findViewById(R.id.iv_avatar_vip);
-            holder.tvContent = (TextView) view.findViewById(R.id.tv_content);
-            holder.flImg = (FrameLayout) view.findViewById(R.id.fl_img);
-            holder.gvImages = (GridView) view.findViewById(R.id.gv_images);
-            holder.ivImage = (ImageView) view.findViewById(R.id.iv_image);
-            holder.includeRetweetedStatus = (LinearLayout) view.findViewById(R.id.include_retweeted_status);
-            holder.tvRetweetedContent = (TextView) view.findViewById(R.id.tv_retweeted_content);
-            holder.includeRetweetedStatusImage = (FrameLayout) view.findViewById(R.id.include_status_image);
-            holder.gvRetweetedImages = (GridView) view.findViewById(R.id.gv_images);
-            holder.ivRetweedImage = (ImageView) view.findViewById(R.id.iv_image);
-            holder.llShareBottom = (LinearLayout) view.findViewById(R.id.ll_share_bottom);
-            holder.ivShareBottom = (ImageView) view.findViewById(R.id.iv_share_bottom);
-            holder.tvShareBottom = (TextView) view.findViewById(R.id.tv_share_bottom);
-            holder.llCommentBottom = (LinearLayout) view.findViewById(R.id.ll_comment_bottom);
-            holder.ivCommentBottom = (ImageView) view.findViewById(R.id.iv_comment_bottom);
-            holder.tvCommentBottom = (TextView) view.findViewById(R.id.tv_comment_bottom);
-            holder.llLikeBottom = (LinearLayout) view.findViewById(R.id.ll_like_bottom);
-            holder.ivLikeBottom = (ImageView) view.findViewById(R.id.iv_like_bottom);
-            holder.tvLikeBottom = (TextView) view.findViewById(R.id.tv_like_bottom);
+            holder.llStatusItem = view.findViewById(R.id.ll_status_item);
+            holder.civAvatar = view.findViewById(R.id.civ_avatar);
+            holder.tvName =  view.findViewById(R.id.tv_name);
+            holder.tvSource = view.findViewById(R.id.tv_source);
+            holder.tvCreateTime = view.findViewById(R.id.tv_create_time);
+            holder.btMore = view.findViewById(R.id.bt_status_more);
+            holder.ivAvatarVip = view.findViewById(R.id.iv_avatar_vip);
+            holder.tvContent = view.findViewById(R.id.tv_content);
+            holder.statusImg = view.findViewById(R.id.fl_image);
+            holder.gvImages = holder.statusImg.findViewById(R.id.gv_images);
+            holder.ivImage = holder.statusImg.findViewById(R.id.iv_image);
+            holder.includeRetweetedStatus = view.findViewById(R.id.include_retweeted_status);
+            holder.tvRetweetedContent = holder.includeRetweetedStatus.findViewById(R.id.tv_retweeted_content);
+            holder.retweetedImage = holder.includeRetweetedStatus.findViewById(R.id.retweeted_image);
+            holder.gvRetweetedImages = holder.retweetedImage.findViewById(R.id.gv_images);
+            holder.ivRetweedImage = holder.retweetedImage.findViewById(R.id.iv_image);
+            holder.llShareBottom = view.findViewById(R.id.ll_share_bottom);
+            holder.ivShareBottom = view.findViewById(R.id.iv_share_bottom);
+            holder.tvShareBottom = view.findViewById(R.id.tv_share_bottom);
+            holder.llCommentBottom = view.findViewById(R.id.ll_comment_bottom);
+            holder.ivCommentBottom = view.findViewById(R.id.iv_comment_bottom);
+            holder.tvCommentBottom = view.findViewById(R.id.tv_comment_bottom);
+            holder.llLikeBottom = view.findViewById(R.id.ll_like_bottom);
+            holder.ivLikeBottom = view.findViewById(R.id.iv_like_bottom);
+            holder.tvLikeBottom = view.findViewById(R.id.tv_like_bottom);
+            view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
@@ -100,22 +108,25 @@ public class StatusAdapter extends BaseAdapter {
         //绑定数据
         final Status status = getItem(i);
         final User user = status.user;
-        imageLoader.displayImage(user.profile_image_url, holder.civAvatar);
-//        Glide.with(context).load(user.profile_image_url).into(holder.civAvatar);
+        Glide.with(context).load(user.profile_image_url).into(holder.civAvatar);
+        if (!user.verified) {
+            holder.ivAvatarVip.setVisibility(View.GONE);
+        }
         holder.tvName.setText(user.name);
-        // 待处理
-        holder.tvSource.setText(Html.fromHtml(status.source));
-        //待处理
-        holder.tvCreateTime.setText(status.created_at);
-        //待处理
-        holder.tvContent.setText(status.text);
+        // 微博尾巴
+        holder.tvSource.setText(Html.fromHtml(status.source).toString());
+        // 发送时间
+        holder.tvCreateTime.setText(DateUtils.getShortTime(status.created_at));
+        // 微博内容
+        holder.tvContent.setText(StringUtils.getWeiboContent(
+                context, holder.tvContent, status.text));
 
         //头像点击事件
         holder.civAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, UserInfoActivity.class);
-                intent.putExtra("userName", user.name);
+                intent.putExtra("uid", user.id);
                 context.startActivity(intent);
             }
         });
@@ -125,15 +136,59 @@ public class StatusAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, UserInfoActivity.class);
-                intent.putExtra("userName", user.name);
+                intent.putExtra("uid", user.id);
                 context.startActivity(intent);
             }
         });
 
-//        setImages(status, holder.flImg, holder.gvImages, holder.ivImage);
+        //更多操作
+        holder.btMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final View contentView = LayoutInflater.from(context).inflate(R.layout.pop_status, null);
+                PopupWindow popupWindow = new PopupWindow(contentView, ScrollView.LayoutParams.WRAP_CONTENT, ScrollView.LayoutParams.WRAP_CONTENT, true);
+                popupWindow.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.bg_pop));
+                popupWindow.showAsDropDown(holder.btMore);
+
+                TextView tvFav = contentView.findViewById(R.id.pop_fav);
+                TextView tvLater = contentView.findViewById(R.id.pop_later);
+
+                tvFav.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ToastUtils.showToast(context, "已加入收藏", 1000);
+                    }
+                });
+
+                tvLater.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ContentValues values = new ContentValues();
+                        values.put("avatar_url", user.profile_image_url);
+                        values.put("name", user.name);
+                        values.put("content", status.text);
+                        db.insert("laters", null, values);
+                        ToastUtils.showToast(context, "已加入稍后阅读", 1000);
+                    }
+                });
+
+            }
+        });
+
+        //内容点击事件
+        holder.tvContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, StatusDetailActivity.class);
+                intent.putExtra("statusId", status.id);
+                context.startActivity(intent);
+            }
+        });
+
+        setImages(status, holder.statusImg, holder.gvImages, holder.ivImage);
 
         final Status retweeted_status = status.retweeted_status;
-        if(retweeted_status != null) {
+        if (retweeted_status != null) {
             User retUser = retweeted_status.user;
 
             holder.includeRetweetedStatus.setVisibility(View.VISIBLE);
@@ -143,10 +198,10 @@ public class StatusAdapter extends BaseAdapter {
                     context, holder.tvRetweetedContent, retweetedContent));
 
             setImages(retweeted_status,
-                    holder.includeRetweetedStatusImage,
+                    holder.retweetedImage,
                     holder.gvRetweetedImages, holder.ivRetweedImage);
         } else {
-            holder.includeRetweetedStatusImage.setVisibility(View.GONE);
+            holder.includeRetweetedStatus.setVisibility(View.GONE);
         }
 
         holder.tvShareBottom.setText(status.reposts_count == 0 ?
@@ -158,61 +213,50 @@ public class StatusAdapter extends BaseAdapter {
         holder.tvLikeBottom.setText(status.attitudes_count == 0 ?
                 "赞" : status.attitudes_count + "");
 
-//        holder.ll_card_content.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(context, StatusDetailActivity.class);
-//                intent.putExtra("status", status);
-//                context.startActivity(intent);
-//            }
-//        });
-
-        holder.includeRetweetedStatus.setOnClickListener(new View.OnClickListener() {
+        holder.tvRetweetedContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, StatusDetailActivity.class);
-//                intent.putExtra("status", retweeted_status);
+                intent.putExtra("statusId", retweeted_status.id);
                 context.startActivity(intent);
             }
         });
 
+        // 转发功能
         holder.llShareBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, WriteStatusActivity.class);
-//                intent.putExtra("status", status);
+                intent.putExtra("statusId", status.id);
+                intent.putExtra("ittCode", 1);
                 context.startActivity(intent);
             }
         });
-//
-//        holder.llCommentBottom.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(status.comments_count > 0) {
-//                    Intent intent = new Intent(context, StatusDetailActivity.class);
-//                    intent.putExtra("status", status);
-//                    intent.putExtra("scroll2Comment", true);
-//                    context.startActivity(intent);
-//                } else {
-//                    Intent intent = new Intent(context, WriteCommentActivity.class);
-//                    intent.putExtra("status", status);
-//                    context.startActivity(intent);
-//                }
-//                ToastUtils.showToast(context, "评个论~", Toast.LENGTH_SHORT);
-//            }
-//        });
-//
-//        holder.ll_like_bottom.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ToastUtils.showToast(context, "点个赞~", Toast.LENGTH_SHORT);
-//            }
-//        });
 
+        // 评论功能
+        holder.llCommentBottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, WriteStatusActivity.class);
+                intent.putExtra("ittCode", 2);
+                intent.putExtra("statusId", status.id);
+                context.startActivity(intent);
+            }
+        });
+
+        // 点赞功能
+        holder.llLikeBottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showToast(context, "接口限制，无法点赞", Toast.LENGTH_SHORT);
+            }
+        });
         return view;
     }
 
+    // 显示图片功能
     private void setImages(final Status status, FrameLayout imageContainer, GridView gv, ImageView iv) {
+
         final ArrayList<String> pic_urls = status.pic_urls;
         final String thumbnail_pic = status.thumbnail_pic;
 
@@ -233,12 +277,12 @@ public class StatusAdapter extends BaseAdapter {
 
                 }
             });
-        } else if (thumbnail_pic != null) {
+        } else if (thumbnail_pic != null && thumbnail_pic.length() > 2 ) {
             imageContainer.setVisibility(View.VISIBLE);
             gv.setVisibility(View.GONE);
             iv.setVisibility(View.VISIBLE);
 
-//            imageLoader.displayImage(thumbnail_pic, iv);
+            Glide.with(context).load(status.bmiddle_pic).into(iv);
             iv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -253,28 +297,27 @@ public class StatusAdapter extends BaseAdapter {
     }
 
 
-
     public static class ViewHolder {
 
         // 微博头部信息
         public LinearLayout llStatusItem;
-        public ImageView civAvatar;
+        public CircleImageView civAvatar;
         public TextView tvName;
         public TextView tvSource;
         public TextView tvCreateTime;
         public ImageView ivAvatarVip;
-        public Button btIsFav;
+        public Button btMore;
 
         // 微博内容信息
         public TextView tvContent;
-        public FrameLayout flImg;
+        public FrameLayout statusImg;
         public GridView gvImages;
         public ImageView ivImage;
 
         // 转发内容信息
         public LinearLayout includeRetweetedStatus;
         public TextView tvRetweetedContent;
-        public FrameLayout includeRetweetedStatusImage;
+        public FrameLayout retweetedImage;
         public GridView gvRetweetedImages;
         public ImageView ivRetweedImage;
 

@@ -28,6 +28,10 @@ public interface WeiboConstants {
     /** 当前 DEMO 应用的 APP_KEY，第三方应用应该使用自己的 APP_KEY 替换该 APP_KEY */
     String APP_KEY      = "1765909135";
 
+    String google_KEY = "1206405345";
+
+    String WEICO_APP_KEY = "211160679";
+
     /** 
      * 当前 DEMO 应用的回调页，第三方应用可以使用自己的回调页。
      * 
@@ -38,6 +42,8 @@ public interface WeiboConstants {
      * </p>
      */
     String REDIRECT_URL = "https://api.weibo.com/oauth2/default.html";
+
+    String WEICO_REDIRECT_URL = "http://oauth.weico.cc";
 
     /**
      * Scope 是 OAuth2.0 授权机制中 authorize 接口的一个参数。通过 Scope，平台将开放更多的微博
@@ -57,4 +63,6 @@ public interface WeiboConstants {
             + "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
             + "follow_app_official_microblog," + "invitation_write";
    // public static final String SCOPE = null;
+
+    String WEICO_PACKAGE_NAME = "com.eico.weico";
 }

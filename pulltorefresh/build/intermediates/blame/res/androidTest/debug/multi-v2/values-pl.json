@@ -1,6 +1,21 @@
 {
     "logs": [
         {
+            "outputFile": "C:\\studioProject\\weihuan\\pulltorefresh\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-pl\\values-pl.xml",
+            "map": [
+                {
+                    "source": "C:\\studioProject\\weihuan\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\values-pl\\values-pl.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,136,210",
+                        "endColumns": "80,73,78",
+                        "endOffsets": "131,205,284"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "C:\\androidproject\\WeiHuan\\pulltorefresh\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-pl\\values-pl.xml",
             "map": [
                 {

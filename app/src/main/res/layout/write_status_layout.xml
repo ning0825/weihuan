@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/bt_wt_back"
-        android:background="@drawable/bg_back"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="10dp"/>
-
-    <Button
-        android:background="@drawable/bg_send"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="10dp"
-        android:layout_alignParentRight="true"/>
-    <TextView
-        android:layout_below="@id/bt_wt_back"
-        android:text="梦里不知身是客，一晌贪欢"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_write"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</RelativeLayout>
+        android:layout_height="wrap_content"
+        android:theme="@style/Base.ThemeOverlay.AppCompat.ActionBar"
+        android:elevation="4dp"></android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <EditText
+                android:id="@+id/et_content"
+                android:minLines="3"
+                android:maxLength="140"
+                android:layout_gravity="top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

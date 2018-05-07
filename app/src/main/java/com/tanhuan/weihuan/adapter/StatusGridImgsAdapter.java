@@ -1,6 +1,5 @@
 package com.tanhuan.weihuan.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +47,6 @@ public class StatusGridImgsAdapter extends BaseAdapter {
         return i;
     }
 
-    @SuppressLint("newapi")
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         final ViewHolder viewHolder;

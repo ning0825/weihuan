@@ -21,9 +21,13 @@
         android:textColor="@color/black"
         android:textSize="14sp"/>
 
-    <include layout="@layout/include_status_image"/>
+    <include layout="@layout/include_status_image"
+        android:id="@+id/fl_image"
+        android:visibility="gone"/>
 
-    <include layout="@layout/include_retweeted_status"/>
+    <include layout="@layout/include_retweeted_status"
+        android:id="@+id/include_retweeted_status"
+        android:visibility="gone"/>
 
     <include
         android:id="@+id/ll_bottom_control"

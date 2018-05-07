@@ -6,19 +6,19 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
-import com.sina.weibo.sdk.auth.AuthInfo;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.auth.WeiboAuthListener;
 import com.sina.weibo.sdk.auth.sso.SsoHandler;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.tanhuan.weihuan.BaseActivity;
 import com.tanhuan.weihuan.R;
+import com.tanhuan.weihuan.api.WHAuthInfo;
 import com.tanhuan.weihuan.constants.WeiboConstants;
 import com.tanhuan.weihuan.utils.AccessTokenKeeper;
 
 public class LoginActivity extends BaseActivity {
 
-    private AuthInfo mAuthInfo;
+    private WHAuthInfo mAuthInfo;
     /**
      * 封装了 "access_token"，"expires_in"，"refresh_token"，并提供了他们的管理功能
      */
@@ -33,7 +33,7 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
-        mAuthInfo = new AuthInfo(this, WeiboConstants.APP_KEY, WeiboConstants.REDIRECT_URL, WeiboConstants.SCOPE);
+        mAuthInfo = new WHAuthInfo(this, WeiboConstants.WEICO_APP_KEY, WeiboConstants.WEICO_REDIRECT_URL, WeiboConstants.SCOPE, WeiboConstants.WEICO_PACKAGE_NAME);
         mSsoHandler = new SsoHandler(LoginActivity.this, mAuthInfo);
 
         findViewById(R.id.auth).setOnClickListener(new View.OnClickListener() {
@@ -65,12 +65,14 @@ public class LoginActivity extends BaseActivity {
         public void onComplete(Bundle values) {
             // 从 Bundle 中解析 Token
             mAccessToken = Oauth2AccessToken.parseAccessToken(values);
+
             if (mAccessToken.isSessionValid()) {
                 // 保存 Token 到 SharedPreferences
                 AccessTokenKeeper.writeAccessToken(LoginActivity.this, mAccessToken);
                 Toast.makeText(LoginActivity.this, "auth_success", Toast.LENGTH_SHORT).show();
 
                 intent2Activity(MainActivity.class);
+                finish();
             } else {
                 // 以下几种情况，您会收到 Code：
                 // 1. 当您未在平台上注册的应用程序的包名与签名时；

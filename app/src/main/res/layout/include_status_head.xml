@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/civ_avatar"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="6dp"
-        android:clickable="true" />
+        android:clickable="true"
+        />
 
     <TextView
         android:id="@+id/tv_name"
@@ -61,11 +62,11 @@
         android:src="@drawable/avatar_vip"/>
 
     <Button
-        android:id="@+id/bt_is_fav"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:id="@+id/bt_status_more"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_margin="10dp"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="6dp"
-        android:background="@drawable/details_favourite_btn_checked" />
+        android:background="@mipmap/down"/>
 
 </RelativeLayout>
