@@ -41,7 +41,7 @@ public class WriteStatusActivity extends BaseActivity {
         setContentView(R.layout.write_status_layout);
         ButterKnife.bind(this);
 
-        statusesAPI = new StatusesAPI(this, WeiboConstants.APP_KEY, AccessTokenKeeper.readAccessToken(this));
+        statusesAPI = new StatusesAPI(this, WeiboConstants.WEICO_APP_KEY, AccessTokenKeeper.readAccessToken(this));
 
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);

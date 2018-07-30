@@ -33,7 +33,7 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
-        mAuthInfo = new WHAuthInfo(this, WeiboConstants.WEICO_APP_KEY, WeiboConstants.WEICO_REDIRECT_URL, WeiboConstants.SCOPE, WeiboConstants.WEICO_PACKAGE_NAME);
+        mAuthInfo = new WHAuthInfo(this, WeiboConstants.APP_KEY, WeiboConstants.REDIRECT_URL  , WeiboConstants.SCOPE, WeiboConstants.WEICO_PACKAGE_NAME);
         mSsoHandler = new SsoHandler(LoginActivity.this, mAuthInfo);
 
         findViewById(R.id.auth).setOnClickListener(new View.OnClickListener() {
